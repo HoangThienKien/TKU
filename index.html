@@ -297,7 +297,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 <header class="sh">
   <div style="display:flex;align-items:center;gap:10px;">
     <button class="mob-menu-btn" id="mobMenuBtn" style="display:none;" onclick="toggleSidebar()">☰</button>
-    <div class="logo-area">
+    <div class="logo-area" onclick="switchTab('cosmo')" style="cursor:pointer;" title="Về Cosmology">
       <div><div class="logo-tk">Thiện Kiến Universe</div><div class="logo-sub">Wikia · Lore Bible v1.0</div></div>
       <div class="logo-sep"></div>
       <div style="font-size:11px;color:var(--text3);letter-spacing:0.1em;font-family:'Cinzel',serif;"><span class="han">善見</span></div>
@@ -413,7 +413,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--bh);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Bạch Hổ</div>
               <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">White Tiger · Tây · Thu · Kim</div>
               <div style="font-size:11px;color:var(--text2);line-height:1.5;">Thu liễm · Chiến lực · Kết tinh. Thanh lọc.</div>
-              <div style="font-size:10px;color:var(--bh);margin-top:6px;">16 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--bh);margin-top:6px;">15 Hoa Giáp</div>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--hv);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(3), 100);">
@@ -424,7 +424,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--hv);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Huyền Vũ</div>
               <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Black Tortoise · Bắc · Đông · Thủy</div>
               <div style="font-size:11px;color:var(--text2);line-height:1.5;">Tàng ẩn · Bền bỉ · Sinh tồn. Tái cấu trúc.</div>
-              <div style="font-size:10px;color:var(--hv);margin-top:6px;">14 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--hv);margin-top:6px;">15 Hoa Giáp</div>
             </div>
           </div>
         </div>
@@ -495,8 +495,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
               <div style="font-size:11px;color:var(--tl);">● Thanh Long (15)</div>
               <div style="font-size:11px;color:var(--ct);">● Chu Tước (15)</div>
-              <div style="font-size:11px;color:var(--bh);">● Bạch Hổ (16)</div>
-              <div style="font-size:11px;color:var(--hv);">● Huyền Vũ (14)</div>
+              <div style="font-size:11px;color:var(--bh);">● Bạch Hổ (15)</div>
+              <div style="font-size:11px;color:var(--hv);">● Huyền Vũ (15)</div>
             </div>
           </div>
         </div>
@@ -514,7 +514,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
         <div style="margin-bottom:32px;text-align:center;">
           <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Thiện Kiến Universe · Tứ Tượng Vận Hành</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--accent);margin-bottom:6px;">Tứ Tượng</div>
-          <div style="font-size:13px;color:var(--text2);">Thanh Long · Chu Tước · Bạch Hổ · Huyền Vũ — 4 trạng thái vận hành của vũ trụ (15 Hoa Giáp mỗi Tượng)</div>
+          <div style="font-size:13px;color:var(--text2);">Thanh Long · Chu Tước · Bạch Hổ · Huyền Vũ — 4 trạng thái vận hành · 15 Hoa Giáp mỗi Tượng</div>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-bottom:40px;" id="ttGrid"></div>
@@ -1179,7 +1179,13 @@ function showProfile(hg){
   const byHtml=hg.birth_years.map(y=>`<span class="by-yr ${Math.abs(2026-y)<=1?'by-hl':''}">${y}</span>`).join('');
   const ttStyle=ttBadgeStyle(hg.tu_tuong);
 
+  const ttIdxForBack={'Thanh Long':0,'Chu Tước':1,'Bạch Hổ':2,'Huyền Vũ':3};
+  const ttI=ttIdxForBack[hg.tu_tuong];
   document.getElementById('profileContent').innerHTML=`
+    <div style="display:flex;gap:10px;align-items:center;padding:16px 0 12px;border-bottom:1px solid var(--border);margin-bottom:0;">
+      <button onclick="switchTab('wheel')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--panel);border:1px solid var(--border2);color:var(--text2);font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">← Vòng 60 Hoa Giáp</button>
+      ${ttI!==undefined?`<button onclick="switchTab('tt');setTimeout(()=>selTT(${ttI}),80)" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--panel);border:1px solid var(--border2);color:var(--text2);font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">${hg.tu_tuong} →</button>`:''}
+    </div>
     <div class="ph">
       <div class="art-slot">
         <div class="slot-ico">⬡</div>
@@ -1260,12 +1266,27 @@ function drawWheel(){
 
   const total=60,sA=(Math.PI*2)/total,off=-Math.PI/2;
 
-  // Outer hanh ring
+  // Outer hanh ring — click area → Tứ Tượng profile
+  // Map tu_tuong → TT_DATA index
+  const ttIdxMap={'Thanh Long':0,'Chu Tước':1,'Bạch Hổ':2,'Huyền Vũ':3};
   HG_DATA.forEach((hg,i)=>{
     const a1=off+i*sA,a2=a1+sA;
     const col=HANH_COL[hg.napam_hanh]||'#888';
     ctx.beginPath();ctx.arc(cx,cy,232,a1+0.01,a2-0.01);ctx.arc(cx,cy,208,a2-0.01,a1+0.01,true);ctx.closePath();
     ctx.fillStyle=col+'20';ctx.fill();ctx.strokeStyle=col+'30';ctx.lineWidth=0.5;ctx.stroke();
+  });
+
+  // Outer TT band labels (4 quadrants, one per TT)
+  const ttGroups={'Thanh Long':[],'Chu Tước':[],'Bạch Hổ':[],'Huyền Vũ':[]};
+  HG_DATA.forEach((hg,i)=>{ if(ttGroups[hg.tu_tuong]) ttGroups[hg.tu_tuong].push(i); });
+  Object.entries(ttGroups).forEach(([tt,idxs])=>{
+    if(!idxs.length)return;
+    const a1=off+idxs[0]*sA, a2=off+(idxs[idxs.length-1]+1)*sA;
+    const mA=(a1+a2)/2;
+    const col=TT_COL[tt]||'#888';
+    ctx.save();ctx.translate(cx+220*Math.cos(mA),cy+220*Math.sin(mA));ctx.rotate(mA+Math.PI/2);
+    ctx.fillStyle=col+'cc';ctx.font='bold 7px Be Vietnam Pro';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(tt,0,0);ctx.restore();
   });
 
   // Middle napam ring
@@ -1331,13 +1352,26 @@ document.getElementById('wheelCanvas').addEventListener('mouseleave',function(){
 });
 document.getElementById('wheelCanvas').addEventListener('click',function(e){
   const rect=this.getBoundingClientRect();
-  const dx=e.clientX-rect.left-250,dy=e.clientY-rect.top-250;
+  // Scale coords to canvas logical size (500x500)
+  const scaleX=500/rect.width, scaleY=500/rect.height;
+  const dx=(e.clientX-rect.left)*scaleX-250, dy=(e.clientY-rect.top)*scaleY-250;
   const dist=Math.sqrt(dx*dx+dy*dy);
-  if(dist<92||dist>162)return;
   let ang=Math.atan2(dy,dx)+Math.PI/2;
   if(ang<0)ang+=Math.PI*2;
   const idx=Math.floor(ang/(Math.PI*2/60))%60;
-  if(HG_DATA[idx])selectChar(HG_DATA[idx].num);
+  // Outer ring (r 208-232) → Tứ Tượng profile
+  if(dist>=208&&dist<=240){
+    const hg=HG_DATA[idx];
+    if(!hg)return;
+    const ttIdxMap={'Thanh Long':0,'Chu Tước':1,'Bạch Hổ':2,'Huyền Vũ':3};
+    const ttIdx=ttIdxMap[hg.tu_tuong];
+    if(ttIdx!==undefined){switchTab('tt');setTimeout(()=>selTT(ttIdx),80);}
+    return;
+  }
+  // Inner ring (r 92-162) → HG profile
+  if(dist>=92&&dist<=162){
+    if(HG_DATA[idx])selectChar(HG_DATA[idx].num);
+  }
 });
 
 // ── MA VUONG ──
