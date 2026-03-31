@@ -318,7 +318,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--ct);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(1), 100);">
             <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
-              <img src="Chu_Tuoc.jpg" alt="Chu Tước" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <img src="Chu_Tuoc.jpg" alt="Chu Tước" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
             </div>
             <div style="padding:14px;">
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--ct);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Chu Tước</div>
@@ -1335,11 +1335,12 @@ function selMV(i){
 // ── TU TUONG ──
 function buildTT(){
   const ttImgMap = {'Thanh Long':'Thanh_Long.jpg','Chu Tước':'Chu_Tuoc.jpg','Bạch Hổ':'Bach_Ho.jpg','Huyền Vũ':'Huyen_Vu.jpg'};
+  const ttImgPos = {'Thanh Long':'top center','Chu Tước':'center','Bạch Hổ':'top center','Huyền Vũ':'top center'};
   document.getElementById('ttGrid').innerHTML=TT_DATA.map((tt,i)=>`
     <div class="ttc" id="ttc-${i}" onclick="selTT(${i})">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:${tt.color};"></div>
       <div style="width:100%;aspect-ratio:16/7;overflow:hidden;background:var(--bg2);">
-        <img src="${ttImgMap[tt.name]}" alt="${tt.name}" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
+        <img src="${ttImgMap[tt.name]}" alt="${tt.name}" style="width:100%;height:100%;object-fit:cover;object-position:${ttImgPos[tt.name]||'top center'};display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
       </div>
       <div class="ttc-top">
         <span class="ttc-sym" style="color:${tt.color}">${tt.symbol}</span>
@@ -1368,12 +1369,14 @@ function selTT(i){
     'Huyền Vũ': 'Huyen_Vu.jpg'
   };
   
+  const ttImgPos2 = {'Thanh Long':'top center','Chu Tước':'center','Bạch Hổ':'top center','Huyền Vũ':'top center'};
+  
   d.innerHTML=`
     <div style="display:grid;grid-template-columns:220px 1fr;gap:28px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);">
       <div style="padding:0;">
         <div style="width:220px;height:293px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;">
           <img src="${ttImages[tt.name]}" 
-               style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;" 
+               style="width:100%;height:100%;object-fit:cover;object-position:${ttImgPos2[tt.name]||'top center'};display:block;" 
                alt="${tt.name}"
                onerror="console.log('Failed to load:', this.src); this.src='https://picsum.photos/seed/tu-tuong-default/220/280.jpg'; console.log('Image not found:', '${ttImages[tt.name]}');">
         </div>
