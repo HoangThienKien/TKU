@@ -310,7 +310,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
     <button class="nav-tab" id="tab-nhanqua" onclick="switchTab('nhanqua')">Nhân-Quả</button>
     <button class="nav-tab" id="tab-mv" onclick="switchTab('mv')">Ngũ Đại Ma Vương</button>
   </nav>
-  <div class="hbadge"><span class="live-dot"></span>&nbsp; TKU v1.0 · 2026</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div id="headerSearch" style="display:none;position:relative;">
+      <input id="srchHeader" placeholder="Tìm Hoa Giáp..." style="background:var(--panel);border:1px solid var(--border2);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:12px;padding:6px 28px 6px 10px;outline:none;border-radius:2px;width:180px;transition:all 0.2s;" oninput="doSearch(this.value);syncSearch(this.value)" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'"/>
+      <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:12px;pointer-events:none;">⌕</span>
+    </div>
+    <div class="hbadge"><span class="live-dot"></span>&nbsp; TKU v1.0 · 2026</div>
+  </div>
 </header>
 
 <div class="main">
@@ -1138,6 +1144,13 @@ function doSearch(v){
   document.querySelector('.s-ico').style.display=srchQ?'none':'block';
   buildSidebar(curHanh,srchQ);
 }
+function syncSearch(v){
+  // Keep sidebar search in sync with header search
+  const s=document.getElementById('srch');
+  if(s&&s.value!==v){s.value=v;doSearch(v);}
+  const sh=document.getElementById('srchHeader');
+  if(sh&&sh.value!==v)sh.value=v;
+}
 function clearSearch(){
   document.getElementById('srch').value='';
   srchQ='';
@@ -1155,6 +1168,8 @@ function selectChar(num){
   if(el){el.classList.add('active');el.scrollIntoView({block:'nearest',behavior:'smooth'});}
   showProfile(selChar);
   drawWheel();
+  // Close sidebar on mobile after selection
+  if(isMobile())closeSidebar();
 }
 
 // ── PROFILE ──
@@ -1183,7 +1198,7 @@ function showProfile(hg){
   const ttI=ttIdxForBack[hg.tu_tuong];
   document.getElementById('profileContent').innerHTML=`
     <div style="display:flex;gap:10px;align-items:center;padding:16px 0 12px;border-bottom:1px solid var(--border);margin-bottom:0;">
-      <button onclick="selChar=null;switchTab('wheel')" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--panel);border:1px solid var(--border2);color:var(--text2);font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">← Vòng 60 Hoa Giáp</button>
+      <button onclick="selChar=null;switchViewInner('wheel');document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));document.getElementById('tab-wheel').classList.add('active');drawWheel();" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--panel);border:1px solid var(--border2);color:var(--text2);font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">← Vòng 60 Hoa Giáp</button>
       ${ttI!==undefined?`<button onclick="switchTab('tt');setTimeout(()=>selTT(${ttI}),80)" style="display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--panel);border:1px solid var(--border2);color:var(--text2);font-family:'Be Vietnam Pro',sans-serif;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">${hg.tu_tuong} →</button>`:''}
     </div>
     <div class="ph">
@@ -1686,6 +1701,9 @@ function switchTab(tab){
   document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
   const tabEl=document.getElementById('tab-'+tab);
   if(tabEl)tabEl.classList.add('active');
+  // Show/hide header search
+  const hs=document.getElementById('headerSearch');
+  if(hs)hs.style.display=(tab==='wheel')?'block':'none';
   const sb=document.getElementById('sidebar');
   if(tab==='wheel'){
     sb.style.display='';
