@@ -218,15 +218,90 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);}
 
 .han{font-family:'Noto Serif SC',serif;}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+
+  /* Header */
+  .sh{padding:0 14px;height:auto;min-height:56px;flex-wrap:wrap;gap:6px;padding-top:8px;padding-bottom:8px;}
+  .logo-tk{font-size:11px;}
+  .logo-sep{display:none;}
+  .hbadge{display:none;}
+  .nav-tabs{gap:3px;flex-wrap:wrap;}
+  .nav-tab{padding:5px 9px;font-size:10px;letter-spacing:0.04em;}
+
+  /* Layout — sidebar ẩn hoàn toàn trên mobile, dùng overlay */
+  .main{flex-direction:column;}
+  .sb{
+    position:fixed;top:0;left:0;bottom:0;z-index:200;
+    width:85vw;max-width:300px;
+    transform:translateX(-100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+    height:100vh;
+  }
+  .sb.open{transform:translateX(0);}
+  .sb-overlay{
+    display:none;position:fixed;inset:0;z-index:199;
+    background:rgba(0,0,0,0.55);backdrop-filter:blur(2px);
+  }
+  .sb-overlay.show{display:block;}
+
+  /* Mobile menu toggle button */
+  .mob-menu-btn{
+    display:flex;align-items:center;justify-content:center;
+    width:36px;height:36px;background:var(--panel);
+    border:1px solid var(--border2);border-radius:2px;
+    color:var(--text2);font-size:16px;cursor:pointer;
+    flex-shrink:0;
+  }
+
+  /* Content area full width */
+  .ca{width:100%;overflow-x:hidden;}
+
+  /* Profile */
+  .pv{padding:20px 16px;}
+  .ph{grid-template-columns:1fr;gap:16px;}
+  .art-slot{aspect-ratio:16/7;max-height:180px;}
+  .sg{grid-template-columns:1fr;gap:10px;}
+  .qg{grid-template-columns:1fr;gap:10px;}
+
+  /* Cosmology */
+  .cst-view{padding:20px 16px;}
+  #cstCanvas{width:100% !important;height:auto !important;}
+
+  /* Wheel */
+  .wv{padding:20px 16px;}
+  #wheelCanvas{width:100% !important;height:auto !important;max-width:340px;display:block;margin:0 auto;}
+
+  /* Ma Vuong */
+  .mv-view{padding:20px 16px;}
+  .mv-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .mvd-grid{grid-template-columns:1fr;gap:10px;}
+
+  /* TT */
+  .tt-view{padding:20px 16px;}
+  .tt-grid{grid-template-columns:1fr;gap:16px;}
+  .tt-detail-grid{grid-template-columns:1fr;gap:10px;}
+
+  /* Inline grids in Cosmology section */
+  #tang9Grid{grid-template-columns:1fr !important;}
+}
+
+@media(max-width:520px){
+  .mv-grid{grid-template-columns:1fr;}
+  .nav-tab{padding:4px 7px;font-size:10px;}
+}
 </style>
 </head>
 <body>
 
 <header class="sh">
-  <div class="logo-area">
-    <div><div class="logo-tk">Thiện Kiến Universe</div><div class="logo-sub">Wikia · Lore Bible v1.0</div></div>
-    <div class="logo-sep"></div>
-    <div style="font-size:11px;color:var(--text3);letter-spacing:0.1em;font-family:'Cinzel',serif;"><span class="han">善見</span></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="mob-menu-btn" id="mobMenuBtn" style="display:none;" onclick="toggleSidebar()">☰</button>
+    <div class="logo-area">
+      <div><div class="logo-tk">Thiện Kiến Universe</div><div class="logo-sub">Wikia · Lore Bible v1.0</div></div>
+      <div class="logo-sep"></div>
+      <div style="font-size:11px;color:var(--text3);letter-spacing:0.1em;font-family:'Cinzel',serif;"><span class="han">善見</span></div>
+    </div>
   </div>
   <nav class="nav-tabs">
     <button class="nav-tab active" id="tab-cosmo" onclick="switchTab('cosmo')">Cosmology</button>
@@ -239,6 +314,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 </header>
 
 <div class="main">
+<div class="sb-overlay" id="sbOverlay" onclick="closeSidebar()"></div>
   <aside class="sb" id="sidebar" style="display:none;">
     <div class="sb-head">
       <div class="sb-title">Danh mục Hoa Giáp</div>
@@ -262,7 +338,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
   <div class="ca" id="ca">
     <!-- COSMOLOGY -->
     <div class="view active" id="view-cosmo">
-      <div style="max-width:1000px;margin:0 auto;padding:36px 40px;">
+      <div style="max-width:1000px;margin:0 auto;padding:clamp(16px,4vw,40px);">
         <div style="margin-bottom:28px;">
           <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Thiện Kiến Universe · Thiên Sử Khai Nguyên</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);margin-bottom:4px;">Cosmology 2.0</div>
@@ -277,11 +353,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 
         <!-- 9 TẦNG -->
         <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">I. Cấu trúc 9 tầng vũ trụ</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;" id="tang9Grid"></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:28px;" id="tang9Grid"></div>
 
         <!-- ENTITIES -->
         <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">II. Các thực thể nguyên lý</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--accent);padding:16px;">
             <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--accent);letter-spacing:0.1em;margin-bottom:3px;">Ý Thức</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Consciousness · Thái Sinh</div>
@@ -306,7 +382,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 
         <!-- TỨ TƯỢNG -->
         <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">III. Tứ Tượng — 4 trạng thái vận hành</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--tl);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(0), 100);">
             <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
               <img src="Thanh_Long.jpg" alt="Thanh Long" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
@@ -355,7 +431,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 
         <!-- 5 FACTION -->
         <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">IV. 5 Faction — 5 Thế giới vật chất</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--hoa);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(0), 100);">
             <div style="font-size:11px;color:var(--hoa);font-weight:600;margin-bottom:2px;">Solar Kingdom</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Hoả Đế Quốc</div>
@@ -477,7 +553,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 
     <!-- MA VUONG VIEW -->
     <div class="view" id="view-mv">
-      <div class="mv-view">
+      <div class="mv-view" style="padding:clamp(16px,4vw,36px);">
         <div style="margin-bottom:28px;text-align:center;">
           <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;">Thiện Kiến Universe · Thực Thể Vũ Trụ Độc Lập</div>
           <div class="mv-title">Ngũ Đại Ma Vương</div>
@@ -1374,7 +1450,7 @@ function selTT(i){
   const ttImgPos2 = {'Thanh Long':'top center','Chu Tước':'center','Bạch Hổ':'top center','Huyền Vũ':'top center'};
   
   d.innerHTML=`
-    <div style="display:grid;grid-template-columns:220px 1fr;gap:28px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);">
+    <div style="display:grid;grid-template-columns:220px 1fr;gap:28px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);" class="tt-ph">
       <div style="padding:0;">
         <div style="width:220px;height:293px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;">
           <img src="${ttImages[tt.name]}" 
@@ -1615,6 +1691,53 @@ setTimeout(drawWheel,100);
 const fg=document.querySelector('.napam-grp');
 if(fg)fg.classList.add('open');
 
+// ── MOBILE ──
+function isMobile(){return window.innerWidth<=768;}
+
+function setupMobile(){
+  const sb=document.getElementById('sidebar');
+  const btn=document.getElementById('mobMenuBtn');
+  if(isMobile()){
+    btn.style.display='flex';
+    // Sidebar: remove inline display:none so CSS controls it via transform
+    sb.style.display='';
+  } else {
+    btn.style.display='none';
+    // Restore sidebar display for desktop (controlled by switchTab)
+    if(!sb.classList.contains('open')) sb.style.display='none';
+  }
+}
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sbOverlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('show');
+}
+
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sbOverlay').classList.remove('show');
+}
+
+// Override switchTab to handle mobile sidebar visibility
+const _origSwitchTab=switchTab;
+switchTab=function(tab){
+  _origSwitchTab(tab);
+  if(!isMobile()){
+    // Desktop: original behavior (show/hide inline)
+    const sb=document.getElementById('sidebar');
+    if(tab==='wheel') sb.style.display='';
+    else sb.style.display='none';
+  } else {
+    // Mobile: sidebar is overlay, always keep it accessible
+    document.getElementById('mobMenuBtn').style.display=
+      (tab==='wheel')?'flex':'none';
+  }
+};
+
+setupMobile();
+window.addEventListener('resize',setupMobile);
 </script>
 </body>
 </html>
