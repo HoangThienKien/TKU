@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TKU WIKIA — Thiện Kiến Universe</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#06080f;--bg2:#0a0d16;--panel:#111525;--panel2:#151b2e;
@@ -216,6 +216,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 .faction-detail-value{font-size:13px;color:var(--text);white-space:pre-line;line-height:1.6;}
 
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);}
+
+.han{font-family:'Noto Serif SC',serif;}
 </style>
 </head>
 <body>
@@ -224,7 +226,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
   <div class="logo-area">
     <div><div class="logo-tk">Thiện Kiến Universe</div><div class="logo-sub">Wikia · Lore Bible v1.0</div></div>
     <div class="logo-sep"></div>
-    <div style="font-size:11px;color:var(--text3);letter-spacing:0.1em;font-family:'Cinzel',serif;">善見</div>
+    <div style="font-size:11px;color:var(--text3);letter-spacing:0.1em;font-family:'Cinzel',serif;"><span class="han">善見</span></div>
   </div>
   <nav class="nav-tabs">
     <button class="nav-tab active" id="tab-cosmo" onclick="switchTab('cosmo')">Cosmology</button>
@@ -479,7 +481,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
         <div style="margin-bottom:28px;text-align:center;">
           <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;">Thiện Kiến Universe · Thực Thể Vũ Trụ Độc Lập</div>
           <div class="mv-title">Ngũ Đại Ma Vương</div>
-          <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--text3);letter-spacing:0.1em;margin-top:4px;">The Five Poison Sovereigns · 五大魔王</div>
+          <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--text3);letter-spacing:0.1em;margin-top:4px;">The Five Poison Sovereigns · <span class="han">五大魔王</span></div>
         </div>
         <div style="background:var(--panel2);border:1px solid var(--border2);padding:20px;margin-bottom:28px;">
           <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">Vũ Trụ Luận · TKU Lore Bible v1.0</div>
@@ -808,7 +810,7 @@ const HANH_BC={'Kim':'bk','Hỏa':'bh','Mộc':'bm','Thủy':'bt','Thổ':'bo'};
 const HANH_NC={'Kim':'nk','Hỏa':'nh','Mộc':'nm','Thủy':'nt','Thổ':'no'};
 const TT_COL={'Thanh Long':'#4a8c5c','Chu Tước':'#e05030','Bạch Hổ':'#b8a060','Huyền Vũ':'#3a7ab0'};
 const MV_COL={'Tham':'#d44040','Sân':'#e07830','Si':'#9060c0','Mạn':'#5090d0','Nghi':'#50a080'};
-const MV_SYM={'Tham':'火','Sân':'雷','Si':'霧','Mạn':'王','Nghi':'疑'};
+const MV_SYM={'Tham':'<span class="han">贪</span>','Sân':'<span class="han">嗔</span>','Si':'<span class="han">痴</span>','Mạn':'<span class="han">慢</span>','Nghi':'<span class="han">疑</span>'};
 
 const TANG9=[
   {n:1,label:'Hỗn Mang',en:'Before Existence',desc:'Trạng thái chưa có khả năng. Không Nhân. Không Quả.',col:'#5a6488'},
@@ -1225,7 +1227,7 @@ function drawWheel(){
   ctx.beginPath();ctx.arc(cx,cy,84,0,Math.PI*2);ctx.fillStyle='#06080f';ctx.fill();
   ctx.strokeStyle='#2a3358';ctx.lineWidth=1;ctx.stroke();
   ctx.fillStyle='#c8a96e';ctx.font='bold 12px Cinzel Decorative,serif';ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.fillText('善見',cx,cy-10);
+  ctx.save();ctx.font='bold 12px "Noto Serif SC",serif';ctx.fillText('善見',cx,cy-10);ctx.restore();
   ctx.fillStyle='#5a6488';ctx.font='9px Be Vietnam Pro';ctx.fillText('60 Hoa Giáp',cx,cy+6);
   if(selChar){ctx.fillStyle='#c8a96e';ctx.font='bold 9px Be Vietnam Pro';ctx.fillText(selChar.name,cx,cy+22);}
 }
