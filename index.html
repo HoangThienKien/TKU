@@ -305,29 +305,49 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
         <!-- TỨ TƯỢNG -->
         <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">III. Tứ Tượng — 4 trạng thái vận hành</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;">
-          <div style="background:var(--panel);border:1px solid var(--border);padding:16px;border-top:2px solid var(--tl);cursor:pointer;transition:all 0.2s;" onclick="switchTab('tt'); setTimeout(() => selTT(0), 100);">
-            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--tl);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Thanh Long</div>
-            <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Azure Dragon · Đông · Xuân · Mộc</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Sinh trưởng · Khởi phát · Mở đường. Khởi động chu kỳ.</div>
-            <div style="font-size:10px;color:var(--tl);margin-top:6px;">15 Hoa Giáp</div>
+          <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--tl);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(0), 100);">
+            <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
+              <img src="Thanh_Long.jpg" alt="Thanh Long" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+            <div style="padding:14px;">
+              <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--tl);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Thanh Long</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Azure Dragon · Đông · Xuân · Mộc</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Sinh trưởng · Khởi phát · Mở đường. Khởi động chu kỳ.</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:6px;">15 Hoa Giáp</div>
+            </div>
           </div>
-          <div style="background:var(--panel);border:1px solid var(--border);padding:16px;border-top:2px solid var(--ct);cursor:pointer;transition:all 0.2s;" onclick="switchTab('tt'); setTimeout(() => selTT(1), 100);">
-            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--ct);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Chu Tước</div>
-            <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Vermilion Bird · Nam · Hạ · Hỏa</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Bộc phát · Rực sáng · Danh tiếng. Cực thịnh.</div>
-            <div style="font-size:10px;color:var(--ct);margin-top:6px;">15 Hoa Giáp</div>
+          <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--ct);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(1), 100);">
+            <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
+              <img src="Chu_Tuoc.jpg" alt="Chu Tước" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+            <div style="padding:14px;">
+              <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--ct);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Chu Tước</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Vermilion Bird · Nam · Hạ · Hỏa</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Bộc phát · Rực sáng · Danh tiếng. Cực thịnh.</div>
+              <div style="font-size:10px;color:var(--ct);margin-top:6px;">15 Hoa Giáp</div>
+            </div>
           </div>
-          <div style="background:var(--panel);border:1px solid var(--border);padding:16px;border-top:2px solid var(--bh);cursor:pointer;transition:all 0.2s;" onclick="switchTab('tt'); setTimeout(() => selTT(2), 100);">
-            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--bh);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Bạch Hổ</div>
-            <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">White Tiger · Tây · Thu · Kim</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Thu liễm · Chiến lực · Kết tinh. Thanh lọc.</div>
-            <div style="font-size:10px;color:var(--bh);margin-top:6px;">15 Hoa Giáp</div>
+          <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--bh);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(2), 100);">
+            <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
+              <img src="Bach_Ho.jpg" alt="Bạch Hổ" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+            <div style="padding:14px;">
+              <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--bh);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Bạch Hổ</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">White Tiger · Tây · Thu · Kim</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Thu liễm · Chiến lực · Kết tinh. Thanh lọc.</div>
+              <div style="font-size:10px;color:var(--bh);margin-top:6px;">16 Hoa Giáp</div>
+            </div>
           </div>
-          <div style="background:var(--panel);border:1px solid var(--border);padding:16px;border-top:2px solid var(--hv);cursor:pointer;transition:all 0.2s;" onclick="switchTab('tt'); setTimeout(() => selTT(3), 100);">
-            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--hv);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Huyền Vũ</div>
-            <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Black Tortoise · Bắc · Đông · Thủy</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Tàng ẩn · Bền bỉ · Sinh tồn. Tái cấu trúc.</div>
-            <div style="font-size:10px;color:var(--hv);margin-top:6px;">15 Hoa Giáp</div>
+          <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--hv);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(3), 100);">
+            <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
+              <img src="Huyen_Vu.jpg" alt="Huyền Vũ" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+            <div style="padding:14px;">
+              <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--hv);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Huyền Vũ</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Black Tortoise · Bắc · Đông · Thủy</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Tàng ẩn · Bền bỉ · Sinh tồn. Tái cấu trúc.</div>
+              <div style="font-size:10px;color:var(--hv);margin-top:6px;">14 Hoa Giáp</div>
+            </div>
           </div>
         </div>
 
@@ -1314,9 +1334,13 @@ function selMV(i){
 
 // ── TU TUONG ──
 function buildTT(){
+  const ttImgMap = {'Thanh Long':'Thanh_Long.jpg','Chu Tước':'Chu_Tuoc.jpg','Bạch Hổ':'Bach_Ho.jpg','Huyền Vũ':'Huyen_Vu.jpg'};
   document.getElementById('ttGrid').innerHTML=TT_DATA.map((tt,i)=>`
     <div class="ttc" id="ttc-${i}" onclick="selTT(${i})">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:${tt.color};"></div>
+      <div style="width:100%;aspect-ratio:16/7;overflow:hidden;background:var(--bg2);">
+        <img src="${ttImgMap[tt.name]}" alt="${tt.name}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
+      </div>
       <div class="ttc-top">
         <span class="ttc-sym" style="color:${tt.color}">${tt.symbol}</span>
         <div class="ttc-name" style="color:${tt.color}">${tt.name}</div>
@@ -1338,10 +1362,10 @@ function selTT(i){
   
   // Hình ảnh cho từng Tứ Tượng
   const ttImages = {
-    'Thanh Long': 'Thanh_Long.png',
-    'Chu Tước': 'Chu_Tuoc.png',
-    'Bạch Hổ': 'Bach_Ho.png',
-    'Huyền Vũ': 'Huyen_Vu.png'
+    'Thanh Long': 'Thanh_Long.jpg',
+    'Chu Tước': 'Chu_Tuoc.jpg',
+    'Bạch Hổ': 'Bach_Ho.jpg',
+    'Huyền Vũ': 'Huyen_Vu.jpg'
   };
   
   d.innerHTML=`
