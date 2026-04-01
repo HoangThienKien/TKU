@@ -387,8 +387,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
   </div>
   <nav class="nav-tabs">
     <button class="nav-tab active" id="tab-cosmo" onclick="switchTab('cosmo')">Cosmology</button>
-    <button class="nav-tab" id="tab-tt" onclick="switchTab('tt')">Four Symbols</button>
-    <button class="nav-tab" id="tab-wheel" onclick="switchTab('wheel')">60 Zodiacs</button>
+    <button class="nav-tab" id="tab-tt" onclick="switchTab('tt')">Four Heavenly Creatures</button>
+    <button class="nav-tab" id="tab-wheel" onclick="switchTab('wheel')">60 Sexagenary cycle</button>
     <button class="nav-tab" id="tab-nhanqua" onclick="switchTab('nhanqua')">Cause-Effect</button>
     <button class="nav-tab" id="tab-mv" onclick="switchTab('mv')">Five Demon Kings</button>
     <button class="nav-tab" id="tab-luatnguong" onclick="switchTab('luatnguong')">Threshold Law</button>
@@ -415,11 +415,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
       <div class="sb-title">Zodiac Directory</div>
       <div class="filter-row">
         <button class="fbtn active" id="fall" onclick="filterHanh('all')">All</button>
-        <button class="fbtn fk" onclick="filterHanh('Kim')">Kim</button>
-        <button class="fbtn fh" onclick="filterHanh('Hỏa')">Hỏa</button>
-        <button class="fbtn fm" onclick="filterHanh('Mộc')">Mộc</button>
-        <button class="fbtn ft" onclick="filterHanh('Thủy')">Thủy</button>
-        <button class="fbtn fo" onclick="filterHanh('Thổ')">Thổ</button>
+        <button class="fbtn fk" onclick="filterHanh('Kim')">Kim (Metal)</button>
+        <button class="fbtn fh" onclick="filterHanh('Hỏa')">Hỏa (Fire)</button>
+        <button class="fbtn fm" onclick="filterHanh('Mộc')">Mộc (Wood)</button>
+        <button class="fbtn ft" onclick="filterHanh('Thủy')">Thủy (Water)</button>
+        <button class="fbtn fo" onclick="filterHanh('Thổ')">Thổ (Earth)</button>
       </div>
       <div class="search-wrap">
         <input class="search-inp" id="srch" placeholder="Name, Elemental Energy, birth year..." oninput="console.log('Search input changed:', this.value); doSearch(this.value)"/>
@@ -437,46 +437,46 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
         <div style="margin-bottom:28px;">
           <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Thiện Kiến Universe · Thiên Sử Khai Nguyên</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);margin-bottom:4px;">Cosmology 2.0</div>
-          <div style="font-size:13px;color:var(--text2);">Cấu trúc 9 tầng — từ Hỗn Mang đến 60 Hoa Giáp</div>
+          <div style="font-size:13px;color:var(--text2);">The 9-level structure — from Chaos to the 60 Sexagenary Cycle</div>
         </div>
 
         <!-- CONSTELLATION CANVAS -->
         <div style="margin-bottom:32px;background:var(--panel);border:1px solid var(--border2);padding:24px;">
-          <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">Bản đồ vũ trụ · Từ Hỗn Mang đến Hoa Giáp</div>
+          <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">Universe Map · from Chaos to the Sexagenary Cycle</div>
           <canvas id="cstCanvas" width="880" height="380" style="display:block;width:100%;max-width:880px;"></canvas>
         </div>
 
         <!-- 9 TẦNG -->
-        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">I. Cấu trúc 9 tầng vũ trụ</div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">I. The 9-level structure</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:28px;" id="tang9Grid"></div>
 
         <!-- ENTITIES -->
-        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">II. Các thực thể nguyên lý</div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">II. Primordial Entities</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--accent);padding:16px;">
-            <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--accent);letter-spacing:0.1em;margin-bottom:3px;">Ý Thức</div>
+            <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--accent);letter-spacing:0.1em;margin-bottom:3px;">Consciousness</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Consciousness · Thái Sinh</div>
-            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Muốn trở thành cái gì đó. Biểu hiện · Phân hóa · Hình tướng · Tạo cấu trúc.</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">The Will to Be: Manifestation · Differentiation · Configuration · Structuring</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--thuy);padding:16px;">
             <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--thuy);letter-spacing:0.1em;margin-bottom:3px;">Hư Vô</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">The Void · Thái Tàng</div>
-            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Mọi thứ rồi sẽ trở về không. Hư vô là khoảng trống cho mọi thứ sinh ra và tan đi.</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Everything will eventually return to nothingness. Emptiness is the space where all things are born and dissolve.</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--moc);padding:16px;">
             <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--moc);letter-spacing:0.1em;margin-bottom:3px;">Nhân</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">The Initiatrix · Khởi phát</div>
-            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Người phụ nữ cổ xưa không già đi. Trên tay là những hạt sáng — đơn vị Tiềm Năng, khả năng chưa định hình.</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">The primordial woman does not age. In her hands are grains of light — units of Potential, the unmanifested possibility.</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--hoa);padding:16px;">
             <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--hoa);letter-spacing:0.1em;margin-bottom:3px;">Quả</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">The Executor · Hoàn tất</div>
-            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Điềm tĩnh. Chính xác. Không khoan nhượng. Không ác. Không thiện. Quả chỉ hoàn tất những gì đã đủ điều kiện.</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Calm. Precise. Relentless. Beyond evil, beyond good. The Result only completes what has met its conditions.</div>
           </div>
         </div>
 
         <!-- TỨ TƯỢNG -->
-        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">III. Tứ Tượng — 4 trạng thái vận hành</div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">III. Four Heavenly Creatures — The 4 Operational States</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--tl);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(0), 100);">
             <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);">
@@ -484,9 +484,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
             </div>
             <div style="padding:14px;">
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--tl);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Thanh Long</div>
-              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Azure Dragon · Đông · Xuân · Mộc</div>
-              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Sinh trưởng · Khởi phát · Mở đường. Khởi động chu kỳ.</div>
-              <div style="font-size:10px;color:var(--tl);margin-top:6px;">15 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Azure Dragon · East · Spring · Wood</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Growth · Initiation · Pathfinding. Activating the Cycle.</div>
+              <div style="font-size:10px;color:var(--tl);margin-top:6px;">15 Sexagenary Cycle</div>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--ct);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(1), 100);">
@@ -495,9 +495,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
             </div>
             <div style="padding:14px;">
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--ct);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Chu Tước</div>
-              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Vermilion Bird · Nam · Hạ · Hỏa</div>
-              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Bộc phát · Rực sáng · Danh tiếng. Cực thịnh.</div>
-              <div style="font-size:10px;color:var(--ct);margin-top:6px;">15 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Vermilion Bird · South · Summer · Fire</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Outburst · Radiance · Renown. The Zenith.</div>
+              <div style="font-size:10px;color:var(--ct);margin-top:6px;">15 Sexagenary Cycle</div>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--bh);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(2), 100);">
@@ -506,9 +506,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
             </div>
             <div style="padding:14px;">
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--bh);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Bạch Hổ</div>
-              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">White Tiger · Tây · Thu · Kim</div>
-              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Thu liễm · Chiến lực · Kết tinh. Thanh lọc.</div>
-              <div style="font-size:10px;color:var(--bh);margin-top:6px;">15 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">White Tiger · West · Autumn · Metal</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Contraction · Strategic Prowess · Crystallization. Purification.</div>
+              <div style="font-size:10px;color:var(--bh);margin-top:6px;">15 Sexagenary Cycle</div>
             </div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid var(--hv);cursor:pointer;transition:all 0.2s;overflow:hidden;" onclick="switchTab('tt'); setTimeout(() => selTT(3), 100);">
@@ -517,57 +517,57 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
             </div>
             <div style="padding:14px;">
               <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--hv);letter-spacing:0.05em;margin-bottom:2px;text-transform:uppercase;">Huyền Vũ</div>
-              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Black Tortoise · Bắc · Đông · Thủy</div>
-              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Tàng ẩn · Bền bỉ · Sinh tồn. Tái cấu trúc.</div>
-              <div style="font-size:10px;color:var(--hv);margin-top:6px;">15 Hoa Giáp</div>
+              <div style="font-size:10px;color:var(--text3);margin-bottom:8px;">Black Tortoise · North · Winter · Water</div>
+              <div style="font-size:11px;color:var(--text2);line-height:1.5;">Latence · Resilience · Survival. Restructuring.</div>
+              <div style="font-size:10px;color:var(--hv);margin-top:6px;">15 Sexagenary Cycle</div>
             </div>
           </div>
         </div>
 
         <!-- 5 FACTION -->
-        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">IV. 5 Faction — 5 Thế giới vật chất</div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">IV. 5 Faction — The 5 Material Realms</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:28px;">
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--hoa);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(0), 100);">
             <div style="font-size:11px;color:var(--hoa);font-weight:600;margin-bottom:2px;">Solar Kingdom</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Hoả Đế Quốc</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Năng lượng · Ý chí · Truyền lửa</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Energy · Willpower · Kindling</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--moc);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(1), 100);">
             <div style="font-size:11px;color:var(--moc);font-weight:600;margin-bottom:2px;">Forest Clan</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Thanh Mộc Tộc</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Tăng trưởng · Kết nối · Hệ sinh thái</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Expansion · Connectivity · Ecosystem</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--thuy);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(2), 100);">
             <div style="font-size:11px;color:var(--thuy);font-weight:600;margin-bottom:2px;">Ocean Order</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Hải Linh Giáo</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Chiều sâu · Thông tin · Chiến lược</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Depth · Intelligence · Strategy</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--tho);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(3), 100);">
             <div style="font-size:11px;color:var(--tho);font-weight:600;margin-bottom:2px;">Earth Dominion</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Cửu Địa Thánh Triều</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Nền móng · Hạ tầng · Tài nguyên</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Foundation · Infrastructure · Resources</div>
           </div>
           <div style="background:var(--panel);border:1px solid var(--border);padding:14px;border-top:2px solid var(--kim);cursor:pointer;transition:all 0.2s;" onclick="switchTab('faction'); setTimeout(() => selFaction(4), 100);">
             <div style="font-size:11px;color:var(--kim);font-weight:600;margin-bottom:2px;">Metal Empire</div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:6px;">Kim Cực Quốc</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Cải tổ · Sắc bén · Chuẩn hóa</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;">Reorganization · Incisiveness · Standardization</div>
           </div>
         </div>
 
         <!-- LUAT NGUONG -->
-        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">V. Luật Ngưỡng — Điểm cân bằng vũ trụ</div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">V. The Law of Threshold — The Cosmic Equilibrium</div>
         <div style="background:var(--panel);border:1px solid var(--border);border-top:2px solid #c8904c;padding:20px;margin-bottom:28px;cursor:pointer;transition:all 0.2s;" onclick="switchTab('luatnguong')">
           <div style="display:flex;align-items:center;gap:16px;">
             <div style="font-size:48px;color:#c8904c;opacity:0.8;">⚖</div>
             <div>
               <div style="font-family:'Cinzel',serif;font-size:16px;color:#c8904c;letter-spacing:0.1em;margin-bottom:4px;">Luật Ngưỡng</div>
               <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">The Threshold Law</div>
-              <div style="font-size:13px;color:var(--text2);line-height:1.6;">Kích hoạt khi Nhân quá dày, Quả bị trì hoãn. Tái cấu trúc vũ trụ khi đạt giới hạn tích tụ.</div>
+              <div style="font-size:13px;color:var(--text2);line-height:1.6;">Triggered when Causes are too dense and Results are delayed. Restructuring the cosmos upon reaching the accumulation limit.</div>
             </div>
           </div>
           <div style="margin-top:16px;display:flex;gap:8px;align-items:center;">
-            <span style="font-size:11px;color:#c8904c;font-weight:600;">Đọc thêm →</span>
-            <span style="font-size:10px;color:var(--text3);">Cơ chế tự điều chỉnh của vũ trụ</span>
+            <span style="font-size:11px;color:#c8904c;font-weight:600;">Read more →</span>
+            <span style="font-size:10px;color:var(--text3);">The Universal Self-Regulating Mechanism — The Cosmic Reset.</span>
           </div>
         </div>
 
@@ -582,9 +582,9 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
     <div class="view" id="view-wheel">
       <div class="wv">
         <div style="margin-bottom:24px;">
-          <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;">60 Lãnh Chúa · 30 Nạp Âm · 5 Đại Hành</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--text);margin-bottom:3px;">Vòng Tuần Hoàn 60 Hoa Giáp</div>
-          <div style="font-size:12px;color:var(--text2);">Bấm vào Hoa Giáp để xem profile đầy đủ · Hover để xem nhanh · Scroll để zoom · Click để toggle rotation</div>
+          <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;">60 Lords of the Cycle · 30 Resonances · 5 Great Phases</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--text);margin-bottom:3px;">The 60-Year Cycle of the Stems and Branches</div>
+          <div style="font-size:12px;color:var(--text2);">Select a Cycle Unit for full profile · Hover for preview · Scroll to zoom · Click to enable/disable rotation</div>
         </div>
         <div style="display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap;">
           <div style="position:relative;flex-shrink:0;">
