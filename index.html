@@ -33,6 +33,11 @@
 
 * { box-sizing: border-box; }
 
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -167,12 +172,14 @@ main {
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--dung-quan);
   margin: 0 0 6px;
 }
 
 .info-title {
   font-size: 22px;
   font-weight: 600;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
@@ -273,6 +280,7 @@ main {
 .tt-card-label {
   font-size: 18px;
   font-weight: 600;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
@@ -306,6 +314,7 @@ main {
 .lore-title {
   font-size: 19px;
   font-weight: 600;
+  color: var(--ink);
   margin: 0 0 16px;
 }
 
@@ -339,25 +348,33 @@ main {
   margin: 0 0 12px;
 }
 
-.ngu-hanh-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.ngu-hanh-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.nh-card {
+.nh-item {
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 16px 16px;
+  overflow: hidden;
+}
+
+.nh-item-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
   text-align: left;
 }
 
-.nh-card:hover {
-  border-color: var(--ink-faint);
-  transform: translateY(-2px);
+.nh-item-header:hover {
+  background: rgba(236,230,218,0.04);
 }
 
 .nh-card-dot {
@@ -365,19 +382,44 @@ main {
   height: 10px;
   border-radius: 50%;
   display: inline-block;
-  margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
-.nh-card-label {
+.nh-item-label {
   font-size: 15px;
   font-weight: 600;
+  color: var(--ink);
   margin: 0;
+  flex: 1;
 }
 
-.nh-card-sub {
+.nh-item-sub {
   font-size: 11px;
   color: var(--ink-faint);
-  margin: 2px 0 0;
+}
+
+.nh-item-chevron {
+  font-size: 12px;
+  color: var(--ink-faint);
+  transition: transform 0.2s;
+}
+
+.nh-item.open .nh-item-chevron {
+  transform: rotate(180deg);
+}
+
+.nh-item-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.nh-item.open .nh-item-panel {
+  max-height: 600px;
+}
+
+.nh-item-panel-inner {
+  padding: 4px 16px 16px;
 }
 
 .modal-box-wide {
@@ -400,6 +442,7 @@ main {
 .nap-am-item-label {
   font-size: 14px;
   font-weight: 500;
+  color: var(--ink);
   margin: 0 0 2px;
 }
 
@@ -498,6 +541,7 @@ main {
 .ma-an-name {
   font-size: 13.5px;
   font-weight: 500;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
@@ -570,6 +614,7 @@ main {
 .modal-hero-title {
   font-size: 32px;
   font-weight: 600;
+  color: var(--ink);
   margin: 0 0 6px;
 }
 
@@ -692,7 +737,7 @@ footer {
     </div>
     <div class="dual-col">
       <p class="dual-col-label">Ngũ Hành</p>
-      <div class="ngu-hanh-grid" id="nguHanhGrid"></div>
+      <div class="ngu-hanh-accordion" id="nguHanhAccordion"></div>
     </div>
   </div>
 </main>
@@ -718,20 +763,6 @@ footer {
       <div class="hoa-giap-placeholder" id="ttModalHoaGiap"></div>
       <p class="modal-body-label" style="margin-top:20px;">Hoa Giáp thuộc Tượng này</p>
       <div id="ttModalHoaGiapPills"></div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="nhModalOverlay">
-  <div class="modal-box">
-    <button class="modal-close" id="nhModalClose">&times;</button>
-    <div class="modal-hero">
-      <p class="modal-hero-eyebrow" id="nhModalEyebrow"></p>
-      <h2 class="modal-hero-title" id="nhModalTitle"></h2>
-    </div>
-    <div class="modal-body">
-      <p class="modal-body-label">Nạp Âm thuộc hành này</p>
-      <div id="nhModalNapAmList" class="nap-am-list"></div>
     </div>
   </div>
 </div>
