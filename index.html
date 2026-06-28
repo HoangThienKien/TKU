@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiện Kiến Universe — Thần Thoại Khai Sinh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-void: #0a0a0f;
+  --bg-panel: #11111a;
+  --bg-card: #15151f;
+  --ink: #ece6da;
+  --ink-dim: #a8a193;
+  --ink-faint: #6b6760;
+  --line: rgba(236,230,218,0.1);
+  --line-strong: rgba(236,230,218,0.2);
+  --dung-quan: #D85A30;
+  --y-thuc: #F2A623;
+  --hu-vo: #6b7bb8;
+  --nhan: #D4537E;
+  --qua: #378ADD;
+  --thoi-gian: #85B7EB;
+  --khong-gian: #97C459;
+  --tham: #EF9F27;
+  --san: #E24B4A;
+  --si: #7F77DD;
+  --man: #D4537E;
+  --nghi: #5DCAA5;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-void);
+  color: var(--ink);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  overflow-x: hidden;
+}
+
+.han {
+  font-family: 'Noto Serif SC', serif;
+}
+
+header.tku-header {
+  padding: 56px 32px 28px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.tku-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 14px;
+}
+
+h1.tku-title {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 600;
+  margin: 0 0 8px;
+  letter-spacing: 0.01em;
+}
+
+.tku-subtitle {
+  font-size: 15px;
+  color: var(--ink-dim);
+  margin: 0;
+  font-style: italic;
+}
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+
+.viz-row {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.viz-stage {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  height: 640px;
+  background: radial-gradient(ellipse at 50% 30%, #0d0e16 0%, #05050a 70%);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+#tkuCanvasHost {
+  width: 100%;
+  height: 100%;
+}
+
+.viz-hint {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+.viz-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.viz-controls button {
+  background: rgba(20,20,28,0.85);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.viz-controls button:hover {
+  background: rgba(40,40,52,0.95);
+  border-color: var(--ink-faint);
+}
+
+.info-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.info-panel.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.info-panel-empty {
+  color: var(--ink-faint);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.info-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.info-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.info-sub {
+  font-size: 13px;
+  color: var(--ink-dim);
+  font-style: italic;
+  margin: 0 0 18px;
+}
+
+.info-body p {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink-dim);
+  margin: 0 0 14px;
+}
+
+.info-body p:last-child {
+  margin-bottom: 0;
+}
+
+.info-body p.quote {
+  font-style: italic;
+  color: var(--ink);
+  border-left: 2px solid var(--line-strong);
+  padding-left: 14px;
+}
+
+.legend-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding: 16px 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.section-label {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 72px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.tu-tuong-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 880px) {
+  .viz-row { flex-direction: column; }
+  .info-panel { width: 100%; }
+  .tu-tuong-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tt-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  text-align: left;
+}
+
+.tt-card:hover {
+  border-color: var(--ink-faint);
+  transform: translateY(-2px);
+}
+
+.tt-card-label {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.tt-card-sub {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin: 0 0 14px;
+}
+
+.tt-card-count {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--dung-quan);
+  margin: 0;
+}
+
+.tt-card-count-label {
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,9,0.88);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  padding: 60px 20px;
+  overflow-y: auto;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  max-width: 780px;
+  width: 100%;
+  padding: 0;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-dim);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
+
+.modal-hero {
+  padding: 48px 48px 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 10px;
+}
+
+.modal-hero-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.modal-hero-sub {
+  font-size: 14px;
+  color: var(--ink-dim);
+  font-style: italic;
+  margin: 0 0 18px;
+}
+
+.modal-hero-role {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0;
+}
+
+.modal-illustration {
+  margin: 0 48px 0;
+  margin-top: 28px;
+  height: 200px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-faint);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.modal-body {
+  padding: 32px 48px 48px;
+}
+
+.modal-body-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 12px;
+}
+
+.modal-body-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-dim);
+  margin: 0 0 28px;
+}
+
+.hoa-giap-placeholder {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 40px 24px 60px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+</style>
+</head>
+<body>
+
+<header class="tku-header">
+  <p class="tku-eyebrow">Thiện Kiến Universe</p>
+  <h1 class="tku-title">Thần Thoại Khai Sinh</h1>
+  <p class="tku-subtitle">Hai sợi xoắn, một trục bất động, và bài học không bao giờ kết thúc.</p>
+</header>
+
+<main>
+  <div class="viz-row">
+    <div class="viz-stage">
+      <div id="tkuCanvasHost"></div>
+      <div class="viz-hint">Kéo chuột để xoay · cuộn để zoom · bấm vào một thực thể để tra cứu</div>
+      <div class="viz-controls">
+        <button id="btnSide">Góc ngang</button>
+        <button id="btnTop">Góc trên xuống</button>
+        <button id="btnWide">Toàn cảnh</button>
+      </div>
+    </div>
+    <div class="info-panel" id="infoPanel">
+      <div class="info-panel-empty" id="infoEmpty">
+        Bấm vào Ý Thức, Hư Vô, trục Dụng Quân, hoặc các điểm Nhân · Quả · Thời Gian · Không Gian trong mô hình bên trái để xem mô tả.
+      </div>
+      <div id="infoContent" style="display:none;">
+        <p class="info-eyebrow" id="infoEyebrow"></p>
+        <h2 class="info-title" id="infoTitle"></h2>
+        <p class="info-sub" id="infoSub"></p>
+        <div class="info-body" id="infoBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>Tham</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#E24B4A"></span>Sân</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#7F77DD"></span>Si</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#D4537E"></span>Mạn</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#5DCAA5"></span>Nghi</span>
+  </div>
+
+  <p class="section-label">Tứ Tượng · 60 Hoa Giáp</p>
+  <div class="tu-tuong-grid" id="tuTuongGrid"></div>
+</main>
+
+<footer>Thiện Kiến Universe — tài liệu nội bộ TKG</footer>
+
+<div class="modal-overlay" id="ttModalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="ttModalClose">&times;</button>
+    <div class="modal-hero">
+      <p class="modal-hero-eyebrow" id="ttModalEyebrow"></p>
+      <h2 class="modal-hero-title" id="ttModalTitle"></h2>
+      <p class="modal-hero-sub" id="ttModalSub"></p>
+      <p class="modal-hero-role" id="ttModalRole"></p>
+    </div>
+    <div class="modal-illustration" id="ttModalIllustration">
+      Khu vực minh họa — đặt hình ảnh Tượng tại đây
+    </div>
+    <div class="modal-body">
+      <p class="modal-body-label">Tính chất</p>
+      <p class="modal-body-text" id="ttModalDetail"></p>
+      <p class="modal-body-label">60 Hoa Giáp — phân bổ Thổ</p>
+      <div class="hoa-giap-placeholder" id="ttModalHoaGiap"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="scene.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
