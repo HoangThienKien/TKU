@@ -103,7 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var hg = TKU_HOA_GIAP[hgKey];
       var pill = document.createElement('button');
       pill.className = 'hg-pill';
-      pill.innerHTML = hg.name + ' <span class="hg-pill-years">· ' + hg.years.join(' / ') + '</span>';
+      var yearsLabel = hg.years.length >= 2 ? hg.years[1] + ' / ' + hg.years[2] : hg.years.join(' / ');
+      pill.innerHTML = hg.name + ' <span class="hg-pill-years">· ' + yearsLabel + '</span>';
       pill.addEventListener('click', function() {
         openHoaGiapModal(hgKey);
       });
@@ -134,26 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === ttModalOverlay) closeTuTuongModal();
   });
 
-  var nguHanhGrid = document.getElementById('nguHanhGrid');
-  var nhModalOverlay = document.getElementById('nhModalOverlay');
-  var nhModalClose = document.getElementById('nhModalClose');
-  var nhModalEyebrow = document.getElementById('nhModalEyebrow');
-  var nhModalTitle = document.getElementById('nhModalTitle');
-  var nhModalNapAmList = document.getElementById('nhModalNapAmList');
-
-  Object.keys(TKU_NGU_HANH).forEach(function(key) {
-    var nh = TKU_NGU_HANH[key];
-    var card = document.createElement('button');
-    card.className = 'nh-card';
-    card.innerHTML =
-      '<span class="nh-card-dot" style="background:' + nh.color + '"></span>' +
-      '<p class="nh-card-label">' + nh.label + '</p>' +
-      '<p class="nh-card-sub">' + nh.en + '</p>';
-    card.addEventListener('click', function() {
-      openNguHanhModal(key);
-    });
-    nguHanhGrid.appendChild(card);
-  });
+  var nguHanhAccordion = document.getElementById('nguHanhAccordion');
 
   function napAmKeysForHanh(hanhKey) {
     return Object.keys(TKU_NAP_AM).filter(function(naKey) {
@@ -161,42 +143,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  function openNguHanhModal(key) {
+  Object.keys(TKU_NGU_HANH).forEach(function(key) {
     var nh = TKU_NGU_HANH[key];
-    if (!nh) return;
-    nhModalEyebrow.textContent = nh.en;
-    nhModalTitle.textContent = nh.label;
-    nhModalNapAmList.innerHTML = '';
+    var item = document.createElement('div');
+    item.className = 'nh-item';
+
+    var header = document.createElement('button');
+    header.className = 'nh-item-header';
+    header.innerHTML =
+      '<span class="nh-card-dot" style="background:' + nh.color + '"></span>' +
+      '<p class="nh-item-label">' + nh.label + '</p>' +
+      '<span class="nh-item-sub">' + nh.en + '</span>' +
+      '<span class="nh-item-chevron">&#9662;</span>';
+
+    var panel = document.createElement('div');
+    panel.className = 'nh-item-panel';
+    var panelInner = document.createElement('div');
+    panelInner.className = 'nh-item-panel-inner';
+    panel.appendChild(panelInner);
 
     var naKeys = napAmKeysForHanh(key);
     if (naKeys.length === 0) {
       var note = document.createElement('p');
       note.className = 'hg-pill-years';
       note.textContent = 'Chưa có dữ liệu Nạp Âm mẫu cho hành này.';
-      nhModalNapAmList.appendChild(note);
-      return;
+      panelInner.appendChild(note);
+    } else {
+      var napAmList = document.createElement('div');
+      napAmList.className = 'nap-am-list';
+      naKeys.forEach(function(naKey) {
+        var na = TKU_NAP_AM[naKey];
+        var naItem = document.createElement('div');
+        naItem.className = 'nap-am-item';
+        var pillsContainer = document.createElement('div');
+        naItem.innerHTML =
+          '<p class="nap-am-item-label">' + na.label + '</p>' +
+          '<p class="nap-am-item-meaning">' + na.meaning + '</p>';
+        naItem.appendChild(pillsContainer);
+        napAmList.appendChild(naItem);
+        var validHgKeys = na.hoaGiap.filter(function(hgKey) { return TKU_HOA_GIAP[hgKey]; });
+        renderHoaGiapPillRow(pillsContainer, validHgKeys);
+      });
+      panelInner.appendChild(napAmList);
     }
-    naKeys.forEach(function(naKey) {
-      var na = TKU_NAP_AM[naKey];
-      var item = document.createElement('div');
-      item.className = 'nap-am-item';
-      var pillsContainer = document.createElement('div');
-      item.innerHTML =
-        '<p class="nap-am-item-label">' + na.label + '</p>' +
-        '<p class="nap-am-item-meaning">' + na.meaning + '</p>';
-      item.appendChild(pillsContainer);
-      nhModalNapAmList.appendChild(item);
-      var validHgKeys = na.hoaGiap.filter(function(hgKey) { return TKU_HOA_GIAP[hgKey]; });
-      renderHoaGiapPillRow(pillsContainer, validHgKeys);
-    });
-  }
 
-  function closeNguHanhModal() {
-    nhModalOverlay.classList.remove('open');
-  }
-  nhModalClose.addEventListener('click', closeNguHanhModal);
-  nhModalOverlay.addEventListener('click', function(e) {
-    if (e.target === nhModalOverlay) closeNguHanhModal();
+    header.addEventListener('click', function() {
+      var wasOpen = item.classList.contains('open');
+      nguHanhAccordion.querySelectorAll('.nh-item.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+      if (!wasOpen) item.classList.add('open');
+    });
+
+    item.appendChild(header);
+    item.appendChild(panel);
+    nguHanhAccordion.appendChild(item);
   });
 
   var hgModalOverlay = document.getElementById('hgModalOverlay');
@@ -212,10 +213,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var yearsEl = document.getElementById('hgModalYears');
     yearsEl.innerHTML = '';
-    hg.years.forEach(function(y) {
+    var yearLabels = ['Quá khứ', 'Quá khứ', 'Hiện tại', 'Tương lai'];
+    hg.years.forEach(function(y, idx) {
       var chip = document.createElement('span');
       chip.className = 'hg-year-chip';
-      chip.textContent = y;
+      chip.innerHTML = y + ' <span class="hg-pill-years">' + (yearLabels[idx] || '') + '</span>';
       yearsEl.appendChild(chip);
     });
 
@@ -259,7 +261,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) {
     if (e.key !== 'Escape') return;
     closeTuTuongModal();
-    closeNguHanhModal();
     closeHoaGiapModal();
   });
 });
